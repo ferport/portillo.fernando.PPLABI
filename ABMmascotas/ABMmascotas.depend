@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1602685909 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"mascotas.h"
+	"tipo.h"
+	"color.h"
+
+1602684984 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\mascotas.h
+	"tipo.h"
+	"color.h"
+
+1602686462 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\tipo.h
+
+1602686462 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\color.h
+
+1602686612 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\color.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"mascotas.h"
+	"tipo.h"
+	"color.h"
+
+1602687217 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\mascotas.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"mascotas.h"
+	"tipo.h"
+	"color.h"
+
+1602686560 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\tipo.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"mascotas.h"
+	"tipo.h"
+	"color.h"
+
