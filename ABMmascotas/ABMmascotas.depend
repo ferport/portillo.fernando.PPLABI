@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1602685909 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\main.c
+1603291163 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -7,10 +7,16 @@
 	"mascotas.h"
 	"tipo.h"
 	"color.h"
+	"servicio.h"
+	"trabajo.h"
+	"cliente.h"
+	"fecha.h"
+	"informes.h"
 
-1602684984 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\mascotas.h
+1603260150 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\mascotas.h
 	"tipo.h"
 	"color.h"
+	"cliente.h"
 
 1602686462 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\tipo.h
 
@@ -25,7 +31,7 @@
 	"tipo.h"
 	"color.h"
 
-1602687217 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\mascotas.c
+1603290988 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\mascotas.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -33,6 +39,9 @@
 	"mascotas.h"
 	"tipo.h"
 	"color.h"
+	"dataStore.h"
+	"validaciones.h"
+	"cliente.h"
 
 1602686560 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\tipo.c
 	<stdio.h>
@@ -42,4 +51,77 @@
 	"mascotas.h"
 	"tipo.h"
 	"color.h"
+
+1603291530 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\servicio.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"servicio.h"
+	"trabajo.h"
+
+1603138555 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\servicio.h
+
+1603290524 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\trabajo.h
+	"fecha.h"
+	"mascotas.h"
+	"tipo.h"
+	"color.h"
+	"servicio.h"
+	"cliente.h"
+
+1602684600 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\fecha.h
+
+1603259713 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\trabajo.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"trabajo.h"
+	"dataStoreTrabajo.h"
+	"validaciones.h"
+
+1603277726 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\datastore.h
+	"fecha.h"
+
+1603227859 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\datastoretrabajo.h
+	"fecha.h"
+
+1603290484 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\validaciones.h
+	"fecha.h"
+
+1603262479 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"validaciones.h"
+	"fecha.h"
+
+1603255993 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\cliente.h
+
+1603290612 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\cliente.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"mascotas.h"
+	"tipo.h"
+	"color.h"
+	"cliente.h"
+
+1603291963 source:c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\informes.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"informes.h"
+	"validaciones.h"
+
+1603290283 c:\users\fernando\desktop\utn\parciales\lab1\parcial1er\portillo.fernando.pplabi\abmmascotas\informes.h
+	"mascotas.h"
+	"tipo.h"
+	"color.h"
+	"cliente.h"
+	"trabajo.h"
 

@@ -31,11 +31,21 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="cliente.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="cliente.h" />
 		<Unit filename="color.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="color.h" />
+		<Unit filename="dataStore.h" />
+		<Unit filename="dataStoreTrabajo.h" />
 		<Unit filename="fecha.h" />
+		<Unit filename="informes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="informes.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -43,12 +53,22 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mascotas.h" />
+		<Unit filename="servicio.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="servicio.h" />
 		<Unit filename="tipo.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="tipo.h" />
+		<Unit filename="trabajo.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="trabajo.h" />
+		<Unit filename="validaciones.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="validaciones.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

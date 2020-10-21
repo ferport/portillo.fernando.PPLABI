@@ -6,15 +6,19 @@
 #include "mascotas.h"
 #include "tipo.h"
 #include "color.h"
+#include "dataStore.h"
+#include "validaciones.h"
+#include "cliente.h"
 
-int altaMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC, int id){
+int altaMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC, eCliente clientes[], int tamCl, int id){
     int error = 1;
     int indice;
     int idTipo;
     int idColor;
+    int idCliente;
     eMascota nuevaMascota;
 
-    if(mascotas != NULL && tam > 0 && tipos != NULL && tamT > 0 && colores != NULL && tamC > 0 ){
+    if(mascotas != NULL && tam > 0 && tipos != NULL && tamT > 0 && colores != NULL && tamC > 0 && clientes != NULL && tamCl > 0){
 
         system("cls");
         printf("  *** ALTA DE MASCOTA ***\n\n");
@@ -27,7 +31,12 @@ int altaMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor co
             nuevaMascota.isEmpty = 0;
             printf("Ingrese nombre: ");
             fflush(stdin);
-            gets(nuevaMascota.nombre);
+            formatearCadena(gets(nuevaMascota.nombre));
+            while(validacionCadena(nuevaMascota.nombre) == 1){
+                printf("Nombre invalido. Reingrese nombre: ");
+                fflush(stdin);
+                formatearCadena(gets(nuevaMascota.nombre));
+            }
 
             mostrarTipos(tipos, tamT);
             printf("Ingrese id del tipo: ");
@@ -50,6 +59,14 @@ int altaMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor co
             printf("Ingrese edad: ");
             scanf("%d", &nuevaMascota.edad);
 
+            mostrarClientes(clientes, tamCl);
+            printf("Ingrese id del cliente: ");
+            scanf("%d", &idCliente);
+            while(validarCliente(clientes, tamCl, idCliente) == 0){
+                printf("Id invalido. Reingrese id del cliente: ");
+                scanf("%d", &idCliente);
+            }
+            nuevaMascota.idCliente = idCliente;
 
             mascotas[indice] = nuevaMascota;
 
@@ -71,7 +88,7 @@ int buscarLibre(eMascota mascotas[], int tam){
     return indice;
 }
 
-int modificarMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC){
+int modificarMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC, eCliente clientes[], int tamCl){
     int id;
     int indice;
     int error = 1;
@@ -82,12 +99,12 @@ int modificarMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eCol
     int flagDef = 0;
     int idTipo;
 
-    if(mascotas != NULL && tam > 0 && tipos != NULL && tamT > 0 && colores != NULL && tamC > 0 ){
+    if(mascotas != NULL && tam > 0 && tipos != NULL && tamT > 0 && colores != NULL && tamC > 0 && clientes != NULL && tamCl > 0){
 
         system("cls");
         printf("        *** MODIFICAR MASCOTA ***\n\n");
 
-        mostrarMascotas(mascotas, tam, tipos, tamT, colores, tamC);
+        mostrarMascotas(mascotas, tam, tipos, tamT, colores, tamC, clientes, tamCl);
         printf("-------------------------------------------------------\n");
         printf("Ingrese id: ");
         scanf("%d", &id);
@@ -101,7 +118,7 @@ int modificarMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eCol
             system("cls");
 
             printf("*** MODIFICAR MASCOTAS ***\n\n");
-            mostrarMascota(mascotas[indice], tipos, tamT, colores, tamC);
+            mostrarMascota(mascotas[indice], tipos, tamT, colores, tamC, clientes, tamCl);
             printf("1) MODIFICAR TIPO.\n");
             printf("2) MODIFICAR EDAD.\n");
             printf("3) MENU ANTERIOR.\n");
@@ -151,20 +168,20 @@ int modificarMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eCol
     return error;
 }
 
-int mostrarMascotas(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC){
+int mostrarMascotas(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC, eCliente clientes[], int tamCl){
 
     //system("cls");
     int flag = 0;
     int error = 1;
 
-    if(mascotas != NULL && tam > 0 && tipos != NULL && tamT > 0 && colores != NULL && tamC > 0 ){
+    if(mascotas != NULL && tam > 0 && tipos != NULL && tamT > 0 && colores != NULL && tamC > 0 && clientes != NULL && tamCl > 0){
 
             printf("  *** LISTADO DE MASCOTAS ***  \n\n");
-            printf("    ID       NOMBRE         TIPO          COLOR      EDAD   \n");
-            printf("<-------------------------------------------------------->\n");
+            printf("    ID       NOMBRE         TIPO          COLOR      EDAD     CLIENTE\n");
+            printf("<--------------------------------------------------------------------->\n");
         for(int i = 0; i < tam; i++){
             if(!mascotas[i].isEmpty){
-                mostrarMascota(mascotas[i], tipos, tamT, colores, tamC);
+                mostrarMascota(mascotas[i], tipos, tamT, colores, tamC, clientes, tamCl);
                 flag = 1;
             }
         }
@@ -176,11 +193,12 @@ int mostrarMascotas(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColo
     return error;
 }
 
-void mostrarMascota(eMascota unaMascota, eTipo tipos[], int tamT, eColor colores[], int tamC){
+void mostrarMascota(eMascota unaMascota, eTipo tipos[], int tamT, eColor colores[], int tamC, eCliente clientes[], int tamCl){
     char descTipo[20];
     char nombreColor[20];
-    if(!cargarDescripcionTipo(tipos, tamT, unaMascota.idTipo, descTipo) && !cargarNombreColor(colores, tamC, unaMascota.idColor, nombreColor)){
-        printf("  %4d   %10s     %10s      %10s    %02d     \n",unaMascota.id,unaMascota.nombre,descTipo, nombreColor, unaMascota.edad);
+    char nombreCliente[20];
+    if(!cargarDescripcionTipo(tipos, tamT, unaMascota.idTipo, descTipo) && !cargarNombreColor(colores, tamC, unaMascota.idColor, nombreColor) && !cargarNombreCliente(clientes, tamCl, unaMascota.idCliente, nombreCliente)){
+        printf("  %4d   %10s     %10s      %10s    %02d    %10s \n",unaMascota.id,unaMascota.nombre,descTipo, nombreColor, unaMascota.edad, nombreCliente);
     }else{
         printf("Problema para recuperar la descripcion\n");
     }
@@ -197,18 +215,18 @@ int buscarMascotas(eMascota mascotas[], int tam, int id){
     return indice;
 }
 
-int bajaMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC){
+int bajaMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC, eCliente clientes[], int tamCl){
     int id;
     int indice;
     int error = 1;
     char confirma;
 
-    if(mascotas != NULL && tam > 0 && tipos != NULL && tamT > 0 && colores != NULL && tamC > 0 ){
+    if(mascotas != NULL && tam > 0 && tipos != NULL && tamT > 0 && colores != NULL && tamC > 0 && clientes != NULL && tamCl > 0){
 
         system("cls");
         printf("  *** BAJA DE MASCOTA ***\n\n");
 
-        mostrarMascotas(mascotas, tam, tipos, tamT, colores, tamC);
+        mostrarMascotas(mascotas, tam, tipos, tamT, colores, tamC, clientes, tamCl);
         printf("Ingrese id: ");
         scanf("%d", &id);
 
@@ -217,7 +235,7 @@ int bajaMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor co
         if(indice == -1){
             printf("No hay ninguna mascota con ese ID\n");
         }else{
-            mostrarMascota(mascotas[indice], tipos, tamT, colores, tamC);
+            mostrarMascota(mascotas[indice], tipos, tamT, colores, tamC, clientes, tamCl);
             printf("Confirma baja? ");
             fflush(stdin);
             scanf("%c", &confirma);
@@ -234,16 +252,16 @@ int bajaMascota(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor co
     return error;
 }
 
-int mostrarMascotasXTipo(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC){
+int mostrarMascotasXTipo(eMascota mascotas[], int tam, eTipo tipos[], int tamT, eColor colores[], int tamC, eCliente clientes[], int tamCl){
     int error = 1;
     int flag;
     char tipo[20];
 
     if(mascotas != NULL && tipos != NULL && tam > 0 && tamT > 0){
         system("cls");
-        printf("       ***Informe de mascotas *** \n\n");
-        printf("    ID       NOMBRE         TIPO          COLOR      EDAD   \n");
-        printf("<-------------------------------------------------------->\n");
+        printf("       *** MASCOTAS POR TIPO *** \n\n");
+        printf("    ID       NOMBRE         TIPO          COLOR      EDAD     CLIENTE\n");
+        printf("<--------------------------------------------------------------------->\n");
         for(int i = 0; i < tamT; i++){
             flag = 0;
             cargarDescripcionTipo(tipos, tamT, tipos[i].id, tipo);
@@ -251,12 +269,12 @@ int mostrarMascotasXTipo(eMascota mascotas[], int tam, eTipo tipos[], int tamT, 
 
             for(int j = 0; j < tam; j++){
                 if(mascotas[j].isEmpty == 0 && mascotas[j].idTipo == tipos[i].id){
-                    mostrarMascota(mascotas[j] , tipos, tamT, colores, tamC);
+                    mostrarMascota(mascotas[j] , tipos, tamT, colores, tamC, clientes, tamCl);
                     flag = 1;
                 }
             }
             if(flag == 0){
-                printf("Ninguna mascota con este color\n");
+                printf("Ninguna mascota con este tipo\n");
             }
         }
         error = 0;
@@ -277,3 +295,44 @@ int inicializarMascotas(eMascota mascotas[], int tam){
     return error;
 }
 
+int validarMascota(eMascota mascotas[], int tam, int id){
+    int esValido = 1;
+    for(int i =  0; i < tam; i++){
+        if(mascotas[i].id == id){
+            esValido = 0;
+            break;
+        }
+    }
+    return esValido;
+}
+
+int hardcodearMascotas(eMascota mascotas[], int tam, int cant){
+    int retorno = -1;
+    if(mascotas != NULL && tam > 0 && cant <= tam){
+        retorno = 0;
+        for(int i = 0; i < cant; i++){
+            mascotas[i].id = idCien[i];
+            strcpy(mascotas[i].nombre, nombresMascotas[i]);
+            mascotas[i].idTipo = idTipo[i];
+            mascotas[i].idColor = idColor[i];
+            mascotas[i].edad = edadesMascotas[i];
+            mascotas[i].idCliente = idCliente[i];
+            mascotas[i].isEmpty = 0;
+            retorno ++;
+        }
+    }
+
+    return retorno;
+}
+
+void formatearCadena(char cadena[]){
+    strlwr(cadena);
+    int i = 0;
+    cadena[0] = toupper(cadena[0]);
+    while(cadena[i] != '\0'){
+        if(cadena[i] == ' ' || cadena[i] == 39){
+            cadena[i + 1] = toupper(cadena[i + 1]);
+        }
+        i++;
+    }
+}
